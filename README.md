@@ -44,3 +44,16 @@ Ordered an organizer that comes with no divider partitions? No problem. Grab any
 </table>
 
 
+## Router case
+
+Sources: [router-case.scad](./router-case.scad)
+
+A box for my router, speaker, and digital oscilloscope.
+
+<table style="width:100%">
+  <tr>
+    <td><img src="./images/router-case.png" ></td>
+    <td><img src="./images/router-case.jpg" ></td>
+  </tr>
+</table>
+

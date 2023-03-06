@@ -1,7 +1,7 @@
 include <lasercut.scad>; 
 
 
-length = 300;
+length = 310;
 width = 190;
 h1 = 60;
 h2 = 180;
@@ -45,4 +45,4 @@ lasercutoutBox(thickness=thickness, x=width, y=length, z=height_total, sides=4, 
         [], [], [[bottom_hole_offset_x, bottom_hole_offset_h, width - 2 * bottom_hole_offset_x, bottom_hole_h]]
     ]
 );
-%stut();
+stut();
