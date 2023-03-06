@@ -2,7 +2,9 @@
 
 My lasercut boxes collection designed in OpenSCAD with the [lasercut](https://github.com/bmsleight/lasercut) tool.
 
-## Lampa
+## Flashlight
+
+Sources: [Lampa.scad](./Lampa.scad)
 
 A flashlight originally designed in HackLab Kyiv.
 
@@ -15,9 +17,9 @@ A flashlight originally designed in HackLab Kyiv.
 </table>
 
 
-## SDP-box
+## A case with an opening transparent panel
 
-A case with a opening transparent panel.
+Sources: [SDP-box.scad](./SDP-box.scad)
 
 <table style="width:100%">
   <tr>
@@ -26,4 +28,19 @@ A case with a opening transparent panel.
     <td><img src="./images/SDP-box2.jpg" ></td>
   </tr>
 </table>
+
+
+## Drawer partition
+
+Sources: [drawer-partition.scad](./drawer-partition.scad)
+
+Ordered an organizer that comes with no divider partitions? No problem. Grab any carton box and lasercut it in partitions.
+
+<table style="width:100%">
+  <tr>
+    <td><img src="./images/drawer-partition.png" ></td>
+    <td><img src="./images/drawer-partition.jpg" ></td>
+  </tr>
+</table>
+
 
