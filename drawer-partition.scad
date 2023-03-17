@@ -1,6 +1,6 @@
-x=94.75;
-y=69;
-z=44;
+x=125;
+y=100;
+z=30;
 
 
 $fn=64;
@@ -20,7 +20,7 @@ module partitionHalfer(l=x) {
     bottomPadCutWidth = 1.5;
     upperSlotCutDepth = z / 2;
     
-    thickness = 1.0;
+    thickness = 1.5;
     
     fillet(2.0)
     difference() {
@@ -29,14 +29,6 @@ module partitionHalfer(l=x) {
         translate([0, upperSlotCutDepth / 2])
         square([thickness, z - upperSlotCutDepth], center=true);
         
-        pad_translate_z = z/2 - bottomPadCutLength/2;
-        pad_translate_z_mirror = l == y ? pad_translate_z : -pad_translate_z;
-
-        translate([-l/2, pad_translate_z_mirror])
-        square([2*bottomPadCutWidth, bottomPadCutLength], center=true);
-        
-        translate([l/2, pad_translate_z_mirror])
-        square([2*bottomPadCutWidth, bottomPadCutLength], center=true);
     }
 }
 
