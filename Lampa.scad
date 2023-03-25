@@ -19,9 +19,9 @@ lasercutoutBox(thickness = thickness, x=x, y=y, z=z,
     cutouts_a = [
             [[40, 25, 13.8, 9]],
             [],
-            cutouts_air,
+            concat([[4, -0.5, 20, 7.5]], cutouts_air),
             [],
-            [[0, 7, 7, 17]]
+            []
         ],
     circles_remove_a = [
             [[r_hole, x - 10, y/2 - dist_hole/2 - thickness],
