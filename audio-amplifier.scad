@@ -12,6 +12,14 @@ height_total = 90;
 speaker_l = 162;
 w_pad = 10;
 
+module fillet(smooth) {
+   offset(r = smooth) {
+     offset(delta = -smooth) {
+       children();
+     }
+   }
+}
+
 width_total = speaker_l + 2 * w_pad + 2 * thickness;
 
 
@@ -29,14 +37,14 @@ y_tab_space = tabs_l / (n_inner_tabs + 1);
 
 stut_h = 10;
 
-function tab_inner_holes(y) = [ for (i = [1 : n_inner_tabs]) [MID, 20 - thickness, i * y_tab_space - thickness + y] ];
+function tab_inner_holes(y) = [ for (i = [1 : n_inner_tabs]) [MID, 20, i * y_tab_space - thickness + y] ];
 
 
 module stut(y=10)
 {
-    tabs_inner = [ for (i = [1 : n_inner_tabs]) [UP, 10, i * y_tab_space] ];
+    tabs_inner = [ for (i = [1 : n_inner_tabs]) [UP, 11.5, i * y_tab_space] ];
 
-    translate([20, y, thickness + stut_h])
+    translate([20 + thickness, y, thickness + stut_h])
     rotate([0, 90, 0])
     lasercutoutSquare(thickness=thickness, x=stut_h, y=tabs_l, simple_tabs=tabs_inner);
 }
@@ -55,5 +63,14 @@ lasercutoutBox(thickness=thickness, x=length_total, y=width_total, z=height_tota
     ],
 );
 
+
+module pillar() {
+    // for the charger
+    fillet(0.5)
+    square([27, 17]);
+}
+
 stut(y=10);
 stut(y=90);
+
+//pillar();
