@@ -2,6 +2,15 @@
 
 My lasercut boxes collection designed in OpenSCAD with the [lasercut](https://github.com/bmsleight/lasercut) tool.
 
+## Exporting to DXF
+
+The `convert-2d.sh` script converts an OpenSCAD file to the corresponding DXF file to be imported in a lasercut machine.
+
+```
+./convert-2d.sh <filename.scad>
+```
+
+
 ## Flashlight
 
 Sources: [Lampa.scad](./Lampa.scad)
