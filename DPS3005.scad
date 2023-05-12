@@ -12,7 +12,7 @@ Z = 65;
 
 X = X1 + X2;
 
-DC55_21_diam = 7.5;
+DC55_21_diam = 10.5;
 D_banana = 5.5;
 
 DPS_hole_x = 76;
