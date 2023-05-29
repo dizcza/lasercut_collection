@@ -12,11 +12,11 @@ Z = 65;
 
 X = X1 + X2;
 
-DC55_21_diam = 10.5;
+DC55_21_diam = 11.0;
 D_banana = 5.5;
 
-DPS_hole_x = 76;
-DPS_hole_z = 39;
+DPS_hole_x = 75.5;
+DPS_hole_z = 40;
 
 cutouts_count = 7;
 cutouts_thickness = 2;
