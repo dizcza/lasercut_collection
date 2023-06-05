@@ -19,9 +19,9 @@ A flashlight originally designed in HackLab Kyiv.
 
 <table style="width:100%">
   <tr>
-    <td><img src="./images/Lampa.png" ></td>
-    <td><img src="./images/flashlight1.jpg" ></td>
-    <td><img src="./images/flashlight2.jpg" ></td>
+    <td><img src="./images/Lampa.png" height="300" ></td>
+    <td><img src="./images/flashlight1.jpg" height="300" ></td>
+    <td><img src="./images/flashlight2.jpg" height="300" ></td>
   </tr>
 </table>
 
@@ -32,9 +32,9 @@ Sources: [SDP-box.scad](./SDP-box.scad)
 
 <table style="width:100%">
   <tr>
-    <td><img src="./images/SDP-box.png" ></td>
-    <td><img src="./images/SDP-box1.jpg" ></td>
-    <td><img src="./images/SDP-box2.jpg" ></td>
+    <td><img src="./images/SDP-box.png" height="300" ></td>
+    <td><img src="./images/SDP-box1.jpg" height="300" ></td>
+    <td><img src="./images/SDP-box2.jpg" height="300" ></td>
   </tr>
 </table>
 
@@ -47,8 +47,8 @@ Ordered an organizer that comes with no divider partitions? No problem. Grab any
 
 <table style="width:100%">
   <tr>
-    <td><img src="./images/drawer-partition.png" ></td>
-    <td><img src="./images/drawer-partition.jpg" ></td>
+    <td><img src="./images/drawer-partition.png" height="300" ></td>
+    <td><img src="./images/drawer-partition.jpg" height="300" ></td>
   </tr>
 </table>
 
@@ -61,8 +61,22 @@ A box for my router, speaker, and digital oscilloscope.
 
 <table style="width:100%">
   <tr>
-    <td><img src="./images/router-case.png" ></td>
-    <td><img src="./images/router-case.jpg" ></td>
+    <td><img src="./images/router-case.png" height="300" ></td>
+    <td><img src="./images/router-case.jpg" height="300" ></td>
+  </tr>
+</table>
+
+
+## DPS3005 power supply
+
+Sources: [DPS3005.scad](./DPS3005.scad)
+
+Step-down power supply case with banana output plugs.
+
+<table style="width:100%">
+  <tr>
+    <td><img src="./images/DPS3005.png" height="300" ></td>
+    <td><img src="./images/DPS3005.jpg" height="300" ></td>
   </tr>
 </table>
 
