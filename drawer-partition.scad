@@ -29,7 +29,7 @@ module partitionHalferV1(l=x1, extra_cuts=0) {
     }
     
     // top and bottom Y halfers require the larger length
-    pad = (l == y1 && extra_cuts > 0) ? 0.5 : 0;
+    pad = (l == y1 && extra_cuts > 0) ? 1.0 : 0;
     l_padded = l + pad;
     
     fillet(2.0)
@@ -85,5 +85,5 @@ module faceV1() {
 }
 
 
-partitionHalferV1(l=x1);
+partitionHalferV1(l=x1, extra_cuts=1);
 //faceV1();

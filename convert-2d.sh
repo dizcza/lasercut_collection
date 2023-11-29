@@ -52,7 +52,10 @@ projection(cut = false)\
 
 openscad_bin "$SCAD_2D_FILE -o $OUTPUT_FILE"
 
-echo "Output files:"
-ls -l "$OUTPUT_FILE" "$SCAD_2D_FILE"
+if [ $? -eq 0 ]; then
+    rm $SCAD_2D_FILE
+else
+    echo "Output files:"
+    ls -l "$OUTPUT_FILE"
+fi
 
-rm $SCAD_2D_FILE
