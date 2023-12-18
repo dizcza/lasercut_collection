@@ -17,7 +17,7 @@ color("Gold",0.75)
 lasercutoutBox(thickness = thickness, x=x, y=y, z=z,
     sides=6, num_fingers=2,
     cutouts_a = [
-            [[40, 25, 13.8, 9]],
+            [[40, 25, 13.8, 9]],  // rocker
             [],
             concat([[4, -0.5, 20, 7.5]], cutouts_air),
             [],
