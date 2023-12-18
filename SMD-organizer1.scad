@@ -16,44 +16,56 @@ r_hole = 0.75;
 dist_hole = 4;
 height_hole = z/4;
 
-step = x / 5;
+step_x = x / 3;
+step_y = y / 4;
+
+cutout_sz = 15;
 
 
 layer_indices = [1:1:n_layers-1];
 
-
-function simple_tabs_layer_x(layer_id) = [for (xi = [step:step:x]) [MID, xi-thickness/2, h * layer_id - thickness]];
-
-
-function simple_tabs_layer_y(layer_id) = [for (yi = [step:step:y-step]) [MID, h * layer_id - thickness, yi-thickness/2]];
+manifoldCorrection = 0.1;
 
 
-simple_tabs_x = [for (i = layer_indices) each simple_tabs_layer_x(i)];
-simple_tabs_y = [for (i = layer_indices) each simple_tabs_layer_y(i)];
+function cutout_tabs_layer_x(layer_id) = [for (xi = [step_x:step_x:x-step_x]) [xi-cutout_sz/2, h*layer_id-thickness, cutout_sz, thickness]];
+
+function cutout_tabs_layer_y(layer_id) = [for (yi = [step_y:step_y:y-step_y]) [h*layer_id-thickness, yi-cutout_sz/2, thickness, cutout_sz]];
 
 
-color("Gold",0.75)
-lasercutoutBox(thickness=thickness, x=x, y=y, z=z,
-    sides=5, num_fingers=4,
-    simple_tab_holes_a=[
-        [], [],
-        simple_tabs_x,
-        simple_tabs_x,
-        simple_tabs_y
-    ],
-);
+cutout_tabs_x = [for (i = layer_indices) each cutout_tabs_layer_x(i)];
+cutout_tabs_y = [for (i = layer_indices) each cutout_tabs_layer_y(i)];
 
 
-module layerWithTabs(layer_id=1) {
-    translate([thickness, thickness, h * layer_id])
-    lasercutoutSquare(thickness=thickness, x=x-thickness, y=y-2*thickness,
-        simple_tabs=concat(
-            [for (xi = [step:step:x-step]) [DOWN, xi, 0]],
-            [for (xi = [step:step:x-step]) [UP, xi, y-2*thickness]],
-            [for (yi = [step:step:y-step]) [LEFT, 0, yi]]
-        )
-    );
+module floorLayer(layer_id=1) {
+    translate([thickness, thickness, thickness / 2 + h * layer_id])
+    union() {
+        square([x - thickness, y - 2 * thickness], center=false);
+        for (xi = [step_x:step_x:x-step_x]) {
+            for (yi = [0, y - 2 * thickness]) {
+                translate([xi-cutout_sz/2, -thickness + yi])
+                square([cutout_sz, 2*thickness], center=false);
+            }
+        }
+        for (yi = [step_y:step_y:y-step_y]) {
+            translate([-thickness, yi-cutout_sz/2])
+            square([2*thickness, cutout_sz], center=false);
+        }
+    }
 }
 
 
-for (i = [1:1:n_layers-1]) layerWithTabs(i);
+module box() {
+    color("Gold",0.75)
+    lasercutoutBox(thickness=thickness, x=x, y=y, z=z,
+        sides=5, num_fingers=4,
+        cutouts_a = [[], [],
+            cutout_tabs_x,
+            cutout_tabs_x,
+            cutout_tabs_y
+        ]
+    );
+}
+
+//floorLayer();
+for (i = [1:1:n_layers-1]) floorLayer(i);
+box();
