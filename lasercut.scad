@@ -7,6 +7,7 @@ kerf=0.0;// Hacky global for kerf
 
 generate = 0; 
 
+
 if (generate == 1)
 {
     // openscad examples.scad -D generate=1 -o /tmp/d.csg 2>&1 >/dev/null  | sed 's/ECHO: \"\[LC\] //' | sed 's/"$//' | sed '$a;' >./generate.scad ; openscad ./generate.scad -o generate.dxf
@@ -136,11 +137,11 @@ module lasercutout(thickness,  points= [],
         {
             if(twist_holes[t][4] != undef) 
             {
-                twistHole(twist_holes[t][0], twist_holes[t][1], twist_holes[t][2], twist_holes[t][3], thickness, spine=twist_holes[t][4]);
+                twistHole(twist_holes[t][0], twist_holes[t][1], twist_holes[t][2], twist_holes[t][3], thickness=thickness, spine=twist_holes[t][4]);
             }
             else
             {
-                twistHole(twist_holes[t][0], twist_holes[t][1], twist_holes[t][2], twist_holes[t][3], thickness, spine=3*thickness);
+                twistHole(twist_holes[t][0], twist_holes[t][1], twist_holes[t][2], twist_holes[t][3], thickness=thickness, spine=3*thickness);
             }
         }    
         if(twist_connect != undef) for (t = [0:1:len(twist_connect)-1]) 

@@ -2,18 +2,21 @@ include <lasercut.scad>;
 
 $fn = 60;
 
-thickness = 3.0;
+thickness = 4.0;
+thickness_twist = 3.0;
 z = 510 + 2 * thickness;
-y0 = 50;
-y = y0 + 2 * thickness;
-x = 55;
+y = 50 + 2 * thickness;
+x = 70 + thickness;
 
 holder_width = 10;
 holder_height = 8.5;
 
 x_twist = 12;
 
-twist_array = [[DOWN, x - holder_height - thickness / 2, y - x_twist / 2 - 3 * thickness, x_twist, 3 * thickness]];
+
+magic1 = y - x_twist / 2 - 3 * thickness_twist;
+
+twist_array = [[DOWN, x - holder_height - thickness / 2, magic1, x_twist, 3 * thickness_twist]];
 
 manifoldCorrection = 0.1;
 
@@ -42,14 +45,13 @@ module panel2d() {
     fillet(1)
     union() {
         panelSquare();
-
         
-        translate([y - x_twist / 2 - 3 * thickness - x_twist / 2 + thickness, -x_twist_ledge])
+        translate([magic1 - x_twist / 2 + thickness_twist + thickness - thickness_twist, -x_twist_ledge])
         projection()
         lasercutoutSquare(thickness=thickness, x=x_twist, y=z + 2 * x_twist_ledge,
             twist_connect=[
-                [RIGHT,0,x_twist_ledge,2*thickness - manifoldCorrection],
-                [RIGHT,0,z - thickness + x_twist_ledge,2*thickness - manifoldCorrection],
+                [RIGHT,0,x_twist_ledge,2*thickness_twist - manifoldCorrection],
+                [RIGHT,0,z - thickness + x_twist_ledge,2*thickness_twist - manifoldCorrection],
             ]
         );
     }
@@ -80,6 +82,8 @@ module box() {
     );
 }
 
-//panelSquare();
+
+
+//panel2d();
 box();
 %panel3d();
