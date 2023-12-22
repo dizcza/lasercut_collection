@@ -5,7 +5,16 @@ RIGHT = 270;
 MID = 360;
 kerf=0.0;// Hacky global for kerf
 
-generate = 0; 
+generate = 0;
+
+
+module fillet(smooth) {
+   offset(r = smooth) {
+     offset(delta = -smooth) {
+       children();
+     }
+   }
+}
 
 
 if (generate == 1)

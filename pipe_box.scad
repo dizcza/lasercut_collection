@@ -21,16 +21,6 @@ twist_array = [[DOWN, x - holder_height - thickness / 2, magic1, x_twist, 3 * th
 manifoldCorrection = 0.1;
 
 
-
-module fillet(smooth) {
-   offset(r = smooth) {
-     offset(delta = -smooth) {
-       children();
-     }
-   }
-}
-
-
 module panelSquare() {
     translate([thickness, thickness])
     square([y - 2.5 * thickness, z - 2 * thickness], center=false);

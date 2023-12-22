@@ -21,15 +21,18 @@ step_y = y / 4;
 
 cutout_sz = 15;
 
+hole_extra = 0.25;
+thickness_hole = thickness + hole_extra;
+cutout_hole = cutout_sz + hole_extra;
 
 layer_indices = [1:1:n_layers-1];
 
 manifoldCorrection = 0.1;
 
 
-function cutout_tabs_layer_x(layer_id) = [for (xi = [step_x:step_x:x-step_x]) [xi-cutout_sz/2, h*layer_id-thickness, cutout_sz, thickness]];
+function cutout_tabs_layer_x(layer_id) = [for (xi = [step_x:step_x:x-step_x]) [xi-cutout_hole/2, h*layer_id-thickness_hole, cutout_hole, thickness_hole]];
 
-function cutout_tabs_layer_y(layer_id) = [for (yi = [step_y:step_y:y-step_y]) [h*layer_id-thickness, yi-cutout_sz/2, thickness, cutout_sz]];
+function cutout_tabs_layer_y(layer_id) = [for (yi = [step_y:step_y:y-step_y]) [h*layer_id-thickness_hole, yi-cutout_hole/2, thickness_hole, cutout_hole]];
 
 
 cutout_tabs_x = [for (i = layer_indices) each cutout_tabs_layer_x(i)];
@@ -38,6 +41,7 @@ cutout_tabs_y = [for (i = layer_indices) each cutout_tabs_layer_y(i)];
 
 module floorLayer(layer_id=1) {
     translate([thickness, thickness, thickness / 2 + h * layer_id])
+    fillet(1)
     union() {
         square([x - thickness, y - 2 * thickness], center=false);
         for (xi = [step_x:step_x:x-step_x]) {
