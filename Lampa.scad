@@ -2,7 +2,7 @@ include <lasercut.scad>;
 
 $fn = 60;
 
-thickness = 3.7;
+thickness = 3.1;
 x = 120;
 y = 45;
 z = 30;
@@ -19,7 +19,7 @@ lasercutoutBox(thickness = thickness, x=x, y=y, z=z,
     cutouts_a = [
             [[40, 25, 13.8, 9]],  // rocker
             [],
-            concat([[4, -0.5, 20, 7.5]], cutouts_air),
+            concat([[4, -0.5, 12, 7.5]], cutouts_air),
             [],
             []
         ],
