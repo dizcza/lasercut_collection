@@ -40,20 +40,26 @@ cutout_tabs_y = [for (i = layer_indices) each cutout_tabs_layer_y(i)];
 
 
 module floorLayer(layer_id=1) {
+    x_cut = 5;
+    y_leave = 10;
     translate([thickness, thickness, thickness / 2 + h * layer_id])
     fillet(1)
-    union() {
-        square([x - thickness, y - 2 * thickness], center=false);
-        for (xi = [step_x:step_x:x-step_x]) {
-            for (yi = [0, y - 2 * thickness]) {
-                translate([xi-cutout_sz/2, -thickness + yi])
-                square([cutout_sz, 2*thickness], center=false);
+    difference() {
+        union() {
+            square([x - thickness, y - 2 * thickness], center=false);
+            for (xi = [step_x:step_x:x-step_x]) {
+                for (yi = [0, y - 2 * thickness]) {
+                    translate([xi-cutout_sz/2, -thickness + yi])
+                    square([cutout_sz, 2*thickness], center=false);
+                }
+            }
+            for (yi = [step_y:step_y:y-step_y]) {
+                translate([-thickness, yi-cutout_sz/2])
+                square([2*thickness, cutout_sz], center=false);
             }
         }
-        for (yi = [step_y:step_y:y-step_y]) {
-            translate([-thickness, yi-cutout_sz/2])
-            square([2*thickness, cutout_sz], center=false);
-        }
+        translate([x - thickness - x_cut, y_leave])
+        square([x_cut, y - 2 * thickness - 2 * y_leave], center=false);
     }
 }
 
@@ -70,6 +76,6 @@ module box() {
     );
 }
 
-//floorLayer();
-for (i = [1:1:n_layers-1]) floorLayer(i);
-box();
+floorLayer();
+//for (i = [1:1:n_layers-1]) floorLayer(i);
+//box();
