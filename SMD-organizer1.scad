@@ -32,7 +32,7 @@ manifoldCorrection = 0.1;
 
 function cutout_tabs_layer_x(layer_id) = [for (xi = [step_x:step_x:x-step_x]) [xi-cutout_hole/2, h*layer_id-thickness_hole, cutout_hole, thickness_hole]];
 
-function cutout_tabs_layer_y(layer_id) = [for (yi = [step_y:step_y:y-step_y]) [h*layer_id-thickness_hole, yi-cutout_hole/2, thickness_hole, cutout_hole]];
+function cutout_tabs_layer_y(layer_id) = [for (yi = [step_y:step_y:y-step_y]) [h*layer_id-thickness_hole, yi-cutout_hole/2-thickness, thickness_hole, cutout_hole]];
 
 
 cutout_tabs_x = [for (i = layer_indices) each cutout_tabs_layer_x(i)];
@@ -40,8 +40,8 @@ cutout_tabs_y = [for (i = layer_indices) each cutout_tabs_layer_y(i)];
 
 
 module floorLayer(layer_id=1) {
-    x_cut = 5;
-    y_leave = 10;
+    x_cut = 10;
+    y_leave = 20;
     translate([thickness, thickness, thickness / 2 + h * layer_id])
     fillet(1)
     difference() {
@@ -54,7 +54,7 @@ module floorLayer(layer_id=1) {
                 }
             }
             for (yi = [step_y:step_y:y-step_y]) {
-                translate([-thickness, yi-cutout_sz/2])
+                translate([-thickness, yi-cutout_sz/2-thickness])
                 square([2*thickness, cutout_sz], center=false);
             }
         }
@@ -76,6 +76,6 @@ module box() {
     );
 }
 
-floorLayer();
-//for (i = [1:1:n_layers-1]) floorLayer(i);
-//box();
+//floorLayer(); translate([0, y, 5]) mirror([0, 1]) floorLayer();
+for (i = [1:1:n_layers-1]) floorLayer(i);
+box();
