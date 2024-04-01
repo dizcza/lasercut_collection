@@ -21,9 +21,9 @@ step_y = y / 4;
 
 cutout_sz = 15;
 
-hole_extra = 0.25;
+hole_extra = 0.15;
 thickness_hole = thickness + hole_extra;
-cutout_hole = cutout_sz + hole_extra;
+cutout_hole = cutout_sz;
 
 layer_indices = [1:1:n_layers-1];
 
