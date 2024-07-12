@@ -16,7 +16,7 @@ rocker_l = 13.8;
 rocker_w = 8.9;
 
 
-DC55_21_diam = 10.5;
+DC55_21_diam = 10.75;
 
 cutouts_count = 10;
 cutouts_thickness = 3;
