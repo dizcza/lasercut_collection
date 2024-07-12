@@ -3,20 +3,20 @@ include <lasercut.scad>;
 $fn = 60;
 
 // The wood thickness
-thickness = 3.0;
+thickness = 4.0;
 
 X = 95 + 2 * thickness;
 Y = 80 + 2 * thickness;
 Z = 55 + 2 * thickness;
 
-display_length = 50;
-display_height = 26;
+display_length = 45;
+display_height = 26.5;
 
 rocker_l = 13.8;
 rocker_w = 8.9;
 
 
-DC55_21_diam = 10.8;
+DC55_21_diam = 10.5;
 
 cutouts_count = 10;
 cutouts_thickness = 3;
@@ -35,7 +35,7 @@ lasercutoutBox(thickness=thickness, x=X, y=Y, z=Z, sides=6, num_fingers=4,
         [],
         cutouts_vent,
         cutouts_vent,
-        [[24, 7, rocker_l, rocker_w], [24, 25, display_height, display_length]],
+        [[23, 7, rocker_l, rocker_w], [23, 27, display_height, display_length]],
         []
     ],
     circles_remove_a = [
