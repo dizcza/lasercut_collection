@@ -19,7 +19,7 @@ lasercutoutBox(thickness = thickness, x=x, y=y, z=z,
     cutouts_a = [
             [[40, 25, 13.8, 8.9]],  // rocker
             [],
-            concat([[3, -3.5, 13, 9]], cutouts_air),
+            concat([[3, -thickness, 13, thickness + 6.5]], cutouts_air),
             [],
             []
         ],
