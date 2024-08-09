@@ -2,7 +2,7 @@ include <lasercut.scad>;
 
 $fn = 60;
 
-thickness = 3.1;
+thickness = 3.6;
 x = 120;
 y = 45;
 z = 30;
@@ -26,5 +26,6 @@ lasercutoutBox(thickness = thickness, x=x, y=y, z=z,
     circles_remove_a = [
             [[r_hole, x - 10, y/2 - dist_hole/2 - thickness],
             [r_hole, x - 10, y/2 + dist_hole/2 - thickness]],
+            [[6.025, 70, y/2 - thickness]],
         ]
 );
