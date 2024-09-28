@@ -1,4 +1,6 @@
 *.dxf
 *.pwj5
+*.svg
 *~
 ignored/
+.ipynb_checkpoints/
