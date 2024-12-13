@@ -1,10 +1,10 @@
 $fn = 60;
 
 thickness = 4.0;
-pad1 = 5;
+pad1 = 8;
 pad_engrave = 2.0;
 x = 62;
-y = 41.8;
+y = 43.3;
 
 
 module pattern(w, h, pad) {
@@ -18,9 +18,12 @@ module engravePart() {
     translate([pad1, pad1])
     pattern(x - pad_engrave, y - 2 * pad_engrave, pad_engrave);
     translate([pad1 - pad_engrave + 8, pad1 + y]) square([51, pad1]);
-    translate([0, pad1 + y + 1.5]) square([pad1 + 10, 2.5]);
+    translate([0, pad1 + y + 2]) square([pad1 + 10, pad1 - 2]);
 }
 
-//pattern(x - pad_engrave, y - 2 * pad_engrave, pad1 + pad_engrave);
+#pattern(x - pad_engrave, y - 2 * pad_engrave, pad1 + pad_engrave);
 //pattern(x, y, pad1);
-#engravePart();
+//engravePart();
+
+// acryl
+square([62, 52]);
