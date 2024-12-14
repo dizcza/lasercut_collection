@@ -7,8 +7,12 @@ h_small = 65;
 d_large = 390;
 h_large = 200;
 
-d_bearing = 26.1;  // outer
-w_circle = 40;
+d_bearing = 30.1;  // outer bearing diam
+w_circle = 40;     // outer ring width
+
+
+d_holder1 = 70;     // holder circle diam
+d_holder2 = 20.5;
 
 angle_inner = 70;
 inner_ring_scale = 0.95;
@@ -101,12 +105,18 @@ module trian_with_hole(h=h_large, w=15) {
 }
 
 
-module m4_holes(d=d_large) {
+module m4_holes(r, angle_shift=ANGLE_STEP / 2) {
     for (i=[0:3]) {
-        rotate(i * 360 / 4 + ANGLE_STEP / 2)
-        translate([0, 0.7 * d/2])
+        rotate(i * 360 / 4 + angle_shift)
+        translate([0, r])
         circle(d=4.5);  // M4
     }
+}
+
+
+module m4_holes_all() {
+    m4_holes(0.7 * d_large / 2);
+    m4_holes((d_holder1 + d_bearing) / 4, angle_shift=-ANGLE_STEP / 2);
 }
 
 
@@ -124,9 +134,14 @@ module star_inner(with_m4=true, d_wires=2.5) {
             }
         }
         if (with_m4) {
-            m4_holes();
+            m4_holes_all();
             translate([0, inner_ring_scale * d_small/2 - 1])
             scale([2, 1]) circle(d=d_wires);
+        }
+        
+        difference() {
+            circle(d=d_holder1+0.01);
+            circle(d=d_holder1);
         }
     }
 }
@@ -152,21 +167,31 @@ module circle_outer_hollow(d=d_large, w_bar=20, with_holes=true) {
                 rotate(i * ANGLE_STEP + ANGLE_STEP / 2)
                 square([w_bar, d-2*w_circle+0.1], center=true);
             }
-            circle(d=80);
+            circle(d=d_holder1+2);
         }
         circle(d=d_bearing);
-        m4_holes();
+        m4_holes_all();
     }
     
 }
 
 module star_outer(d=d_large, with_holes=false) {
-    circle_outer_hollow(with_holes=with_holes);
+
+    difference() {
+        union() {
+            circle_outer_hollow(with_holes=with_holes);
     
-    for (i=[0:8]) {
-        rotate(i * ANGLE_STEP)
-        translate([0, d / 2])
-        trian_with_hole();
+            for (i=[0:8]) {
+                rotate(i * ANGLE_STEP)
+                translate([0, d / 2])
+                trian_with_hole();
+            }
+        }
+    
+        difference() {
+            circle(d=d_holder1+0.01);
+            circle(d=d_holder1);
+        }
     }
 }
 
@@ -188,9 +213,18 @@ module inner_ring(s=inner_ring_scale) {
 }
 
 
-star_inner();
+module holder_circle() {
+    difference() {
+        circle(d=d_holder1);
+        circle(d=d_holder2);
+        m4_holes((d_holder1 + d_bearing) / 4, angle_shift=0);
+    }
+}
+
+
+//star_inner(); translate([0, 0, 2]) inner_ring();
 //star_outer();
+holder_circle();
 //trian_with_hole();
 //print_trian_lasercut();
 //circle_outer_hollow();
-translate([0, 0, 2]) inner_ring();
