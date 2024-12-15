@@ -116,7 +116,7 @@ module m4_holes(r, angle_shift=ANGLE_STEP / 2) {
 
 module m4_holes_all() {
     m4_holes(0.7 * d_large / 2);
-    m4_holes((d_holder1 + d_bearing) / 4, angle_shift=-ANGLE_STEP / 2);
+    m4_holes((d_holder1 + (d_bearing + d_holder2)/2) / 4, angle_shift=-ANGLE_STEP / 2);
 }
 
 
@@ -217,7 +217,7 @@ module holder_circle() {
     difference() {
         circle(d=d_holder1);
         circle(d=d_holder2);
-        m4_holes((d_holder1 + d_bearing) / 4, angle_shift=0);
+        m4_holes((d_holder1 + (d_bearing + d_holder2)/2) / 4, angle_shift=0);
     }
 }
 
