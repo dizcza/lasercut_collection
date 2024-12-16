@@ -29,6 +29,7 @@ trian_alpha = 2 * atan2(trian_bottom_half, trian_h_full);
 
 a_side_inner = h_small / cos(angle_inner/2);
 a_side_outer = trian_h_full / cos(trian_alpha/2);
+m4_offset = (d_holder1 + (d_bearing + d_holder2)/2) / 4;
 
 
 echo([d_small + 2 * h_small, d_large + 2 * h_large, 16 * 1.5 * a_side_inner, 16 * a_side_outer]);
@@ -105,18 +106,18 @@ module trian_with_hole(h=h_large, w=15) {
 }
 
 
-module m4_holes(r, angle_shift=ANGLE_STEP / 2, n=4) {
+module m4_holes(r, angle_shift=ANGLE_STEP / 2, n=4, d=4.3) {
     for (i=[0:(n-1)]) {
         rotate(i * 360 / n + angle_shift)
         translate([0, r])
-        circle(d=4.5);  // M4
+        circle(d=d);  // M4
     }
 }
 
 
 module m4_holes_all() {
     m4_holes(0.7 * d_large / 2);
-    m4_holes((d_holder1 + (d_bearing + d_holder2)/2) / 4, angle_shift=-ANGLE_STEP / 2, n=8);
+    m4_holes(m4_offset, angle_shift=-ANGLE_STEP / 2);
 }
 
 
@@ -202,14 +203,20 @@ module holder_circle() {
     difference() {
         circle(d=d_holder1);
         circle(d=d_holder2);
-        m4_holes((d_holder1 + (d_bearing + d_holder2)/2) / 4, angle_shift=0, n=8);
+        m4_holes(m4_offset, angle_shift=0);
+        
+        difference() {
+            m4_holes(m4_offset, angle_shift=0, d=8.1);
+            m4_holes(m4_offset, angle_shift=0, d=8.0);
+        }
     }
 }
 
 
-//star_inner(); //translate([0, 0, 2]) inner_ring();
+//star_inner(); translate([0, 0, 2]) inner_ring();
 //star_outer();
-//holder_circle();
-trian_with_hole();
+holder_circle();
+//trian_with_hole();
 //print_trian_lasercut();
 //circle_outer_hollow();
+//inner_ring();
