@@ -1,15 +1,15 @@
 $fn = 60;
 
-thickness = 10;
 width = 150;
 width_bar = 20;
+thickness=10;
 
-w_cut = 0.75;
-l_cut = 20;
+w_cut = 0.5;
+l_cut = 10;
 
 h1 = 160;
 h2 = h1 + 40;
-x = 330;
+x = 320;
 a1 = atan2(h1, x);
 a2 = atan2(h2, x);
 
@@ -59,11 +59,12 @@ module bar2() {
 }
 
 
-module bottom_connector() {
+module bottom_connector(l=width) {
+    echo(l);
     difference() {
-        square([width_bar, width]);
+        square([width_bar, l]);
         translate([width_bar/2, 0]) square([w_cut, l_cut]);
-        translate([width_bar/2, width - l_cut + 0.1]) square([w_cut, l_cut]);
+        translate([width_bar/2, l - l_cut + 0.1]) square([w_cut, l_cut]);
     }
 }
 
@@ -88,7 +89,7 @@ module draw_all() {
         translate([0, width + 3 + 2 * width_bar]) bar2();
         translate([0, width + 4 + 3 * width_bar]) bar2();
         translate([l_top + 1, 0]) bottom_connector();
-        translate([l_top + 2 + width_bar, 0]) bottom_connector();
+        translate([l_top + 2 + width_bar, 0]) bottom_connector(l=width - 2 * thickness);
     }
 }
 
