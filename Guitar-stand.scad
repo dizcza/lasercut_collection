@@ -1,8 +1,8 @@
 include <fillet.scad>
 
-w = 110;
+w = 105;
 
-l_total = 290;
+l_total = 300;
 h_total = 100;
 a = 75;
 
