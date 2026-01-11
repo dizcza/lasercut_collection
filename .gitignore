@@ -2,6 +2,7 @@
 *.pwj5
 *.svg
 *.png
+*.stl
 *~
 ignored/
 .ipynb_checkpoints/
