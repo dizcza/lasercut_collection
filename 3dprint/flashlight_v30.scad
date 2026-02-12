@@ -4,9 +4,9 @@ $fn = 64;
 r_inner = 5.25/2;
 r_outer = 5.5; // 4.55
 
-d_magnet = 20.4;  // 20 or 25
+d_magnet = 20.3;  // 20 or 25
 h_magnet = 3.4;
-d_magnet_hole = 4.5;
+d_magnet_hole = 4.4;
 y_maghole = 73;
 
 X_board = 46;
@@ -24,7 +24,7 @@ dist_y2 = 95.9;
 dist_x = 34.8;
 
 
-module flange(h_drill=12.5, diff=false) {
+module flange(h_drill=11, diff=false) {
     if (diff) {
         cylinder(h=h_drill, r=r_inner, center=false);
         cylinder(h=1, r1=r_inner + 1.0, r2=r_inner, center=false);
