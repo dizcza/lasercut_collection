@@ -2,12 +2,12 @@ $fn = 64;
 
 // Flanges
 r_inner = 5.25/2;
-r_outer = 5.5; // 4.55
+r_outer = 5.5;
 
 d_magnet = 20.3;  // 20 or 25
-h_magnet = 3.4;
-d_magnet_hole = 4.4;
-y_maghole = 73;
+h_magnet = 3.35;  // Between 3.3 and 3.4 is OK
+M4_d = 4.4;       // M4 screew to hold the magnet
+y_maghole = 73;   // Magnet Y center
 
 X_board = 46;
 Y_board = 122;
@@ -66,7 +66,7 @@ module flashlight() {
                 
                 translate([X_board / 2, Y_board - y_maghole, H - h_magnet / 2])
                 cylinder(h=h_magnet, d=d_magnet, center=true);
-                translate([X_board / 2, Y_board - y_maghole, H]) cylinder(h=H, d=d_magnet_hole, center=true);
+                translate([X_board / 2, Y_board - y_maghole, H]) cylinder(h=H, d=M4_d, center=true);
             }
             flanges(diff=false);
         }
