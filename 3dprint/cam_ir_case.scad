@@ -7,8 +7,8 @@ Z = 60;
 t = 2.0;
 x_camera = t + 35;
 
-w_ir = 40;  // IR ligth width
-h_ir_bottom = 8;  // 10 - t
+w_ir = 40;  // IR ligth holder width
+h_ir_bottom = 9;
 z_ir_center = h_ir_bottom + 20;
 
 // Flange M4 inner and outer diameters
@@ -42,73 +42,19 @@ module m4_holes(d, x=d_M4_outer/2, z=0) {
 }
 
 
-module camera() {
-    t_wall_camera = 4.0;
-
-    y_camera_holder = t + 9;
-    wx_camera_holder = 38;
-    wy_camera_holder = 24;
-    h1_camera_holder = 6.5;
-    h2_camera_holder = h1_camera_holder + 26;
-    
-    wy_holder_top = 13;
-    x_cut = 10;
-    d_cut_edges = 1.5;
-    
-    difference() {
-        union() {
-            difference() {
-                translate([x_camera-wx_camera_holder/2, y_camera_holder, t])
-                cube([wx_camera_holder, wy_camera_holder, h1_camera_holder]);
-                translate([x_camera-wx_camera_holder/2+8, t+24, t])
-                cube([5, wy_camera_holder, h1_camera_holder]);
-            }
-            translate([x_camera-wx_camera_holder/2-t_wall_camera, y_camera_holder, t])
-            cube([t_wall_camera, wy_camera_holder, h2_camera_holder]);
-            
-            difference() {
-                translate([x_camera+wx_camera_holder/2, y_camera_holder, t])
-                cube([t_wall_camera, wy_camera_holder, h2_camera_holder]);
-                translate([x_camera+wx_camera_holder/2, t+15, t+h1_camera_holder+14])
-                cube([2.5, wy_camera_holder, 3]);
-            }
-            
-            difference() {
-                translate([x_camera-wx_camera_holder/2-t_wall_camera, y_camera_holder, t+h2_camera_holder])
-                cube([2*t_wall_camera+wx_camera_holder, wy_holder_top, 16]);
-                translate([x_camera, y_camera_holder, t+h1_camera_holder+18])
-                rotate([-90, 0, 0]) cylinder(h=wy_camera_holder, d=33);
-                translate([x_camera-x_cut/2, y_camera_holder, t+h1_camera_holder+18])
-                cube([x_cut, wy_holder_top, 50]);
-            }
-        }
-        
-        translate([x_camera-wx_camera_holder/2, y_camera_holder, t+h2_camera_holder])
-        rotate([-90, 0, 0]) cylinder(h=wy_holder_top, d=d_cut_edges);
-        
-        translate([x_camera+wx_camera_holder/2, y_camera_holder, t+h2_camera_holder])
-        rotate([-90, 0, 0]) cylinder(h=wy_holder_top, d=d_cut_edges);
-        
-        translate([x_camera, y_camera_holder+wy_holder_top/2, 46.5])
-        rotate([0, 90, 0]) cylinder(h=100, d=4.5, center=true);
-    }
-}
-
-
-module ir_light(d_ir=28.6, simple=true) {
+module ir_light(d_ir=29.1) {
     h_total = h_ir_bottom + 47;
+    echo("IR light height: ", h_total+t);
+    assert(t+h_total < Z, "IR light is too high!");
+    depth_ir = 22;
     difference() {
         linear_extrude(height=w_ir)
-        polygon(points=[[0,0],[40,0],[40,h_ir_bottom],[20,h_ir_bottom+20],[20,h_total-12],[17,h_total],[0,h_total]]);
-        translate([20,h_ir_bottom,t]) cube([20, 100, 40-2*t]);
+        polygon(points=[[0,0],[depth_ir,0],[depth_ir,h_total-12],[depth_ir-3,h_total],[0,h_total]]);
         translate([0, z_ir_center, 20]) rotate([0, 90, 0]) cylinder(h=100, d=d_ir);
         translate([0, 40, 18]) cube([100, 100, 4]);
         translate([0, h_ir_bottom+20, 20-d_ir/2]) rotate([0, 90, 0]) cylinder(h=100, d=2);
         translate([0, h_ir_bottom+20, 20+d_ir/2]) rotate([0, 90, 0]) cylinder(h=100, d=2);
-        translate([10, h_total-7, 0]) cylinder(h=100, d=6);
-        if (simple) {
-            translate([20, -1, -1]) cube([100, 100, 100]);
-        }
+        translate([depth_ir/2, h_total-7, 0]) cylinder(h=100, d=6);
     }
 }
 
@@ -128,25 +74,19 @@ module main() {
         
         translate([t, t, t]) cube([X-2*t, Y-2*t, Z]);
         
-        translate([X-x_camera, t, 25])
-        rotate([90, 0, 0]) cylinder(h=t, d=39.3);
+        translate([X-x_camera, t, t+25])
+        rotate([90, 0, 0]) cylinder(h=t, d=40.5);
         
         translate([x_ir_margin+w_ir/2, t, z_ir_center])
-        rotate([90, 0, 0]) cylinder(h=t, d=40);
+        rotate([90, 0, 0]) cylinder(h=t, d=41.5);
         
         translate([X-x_camera, Y, t+15])
-        rotate([90, 0, 0]) cylinder(h=t, d=20);
+        rotate([90, 0, 0]) cylinder(h=t, d=21);
         
         m4_holes(d=d_M4_outer);
     }
     flanges_outer();
     stiffeners();
-    
-    translate([X-2*x_camera, 0, 0])
-    camera();
-    
-    translate([x_ir_margin, 80-44, t])
-    rotate([90, 0, 90]) ir_light(d_ir=26.5);
     
     translate([x_ir_margin, 80, t])
     rotate([90, 0, 90]) ir_light();
