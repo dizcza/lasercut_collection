@@ -54,7 +54,7 @@ module ir_light(d_ir=29.1) {
         translate([0, 40, 18]) cube([100, 100, 4]);
         translate([0, h_ir_bottom+20, 20-d_ir/2]) rotate([0, 90, 0]) cylinder(h=100, d=2);
         translate([0, h_ir_bottom+20, 20+d_ir/2]) rotate([0, 90, 0]) cylinder(h=100, d=2);
-        translate([depth_ir/2, h_total-7, 0]) cylinder(h=100, d=6);
+        translate([depth_ir/2, h_total-7, 0]) cylinder(h=100, d=6.5);
     }
 }
 
@@ -81,7 +81,7 @@ module main() {
         rotate([90, 0, 0]) cylinder(h=t, d=41.5);
         
         translate([X-x_camera, Y, t+15])
-        rotate([90, 0, 0]) cylinder(h=t, d=21);
+        rotate([90, 0, 0]) cylinder(h=t, d=20.5);
         
         m4_holes(d=d_M4_outer);
     }
