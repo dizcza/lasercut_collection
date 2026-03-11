@@ -8,7 +8,7 @@ t = 2.0;
 x_camera = t + 35;
 
 w_ir = 40;  // IR ligth holder width
-h_ir_bottom = 9;
+h_ir_bottom = 6;
 z_ir_center = h_ir_bottom + 20;
 
 // Flange M4 inner and outer diameters
@@ -34,7 +34,16 @@ module flanges_outer(x=d_M4_outer/2) {
 }
 
 
-module m4_holes(d, x=d_M4_outer/2, z=0) {
+module fillet(smooth) {
+   offset(r = smooth) {
+     offset(delta = -smooth) {
+       children();
+     }
+   }
+}
+
+
+module m4_holes(d=4.5, x=d_M4_outer/2, z=0) {
     translate([x, x, z]) cylinder(h=t, d=d);
     translate([X - x, Y - x, z]) cylinder(h=t, d=d);
     translate([X - x, x, z]) cylinder(h=t, d=d);
@@ -67,6 +76,16 @@ module stiffeners(t2=2*t, w=10) {
 }
 
 
+module top_cap() {
+    difference() {
+        linear_extrude(height=t)
+        fillet(0.5)
+        square([X, Y]);
+        m4_holes();
+    }
+}
+
+
 module main() {
     x_ir_margin = 20;  // with 't' wall included
     difference() {
@@ -93,6 +112,7 @@ module main() {
 }
 
 
-main();
+//main();
+top_cap();
 
 //ir_light();
