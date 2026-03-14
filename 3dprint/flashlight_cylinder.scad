@@ -1,7 +1,7 @@
 $fn = 128;
 
 t = 1.2;  // material thickness
-h = 70;   // total height
+h = 110;   // total height
 d1 = 65;  // bottom
 d2 = 65;  // top
 
@@ -10,7 +10,7 @@ board_width = 46;
 cut_length = 40;
 
 
-module hook(w=10, depth=3) {
+module hook(w=10, depth=2.25) {
     translate([-w/2, 0, 0])
     difference() {
         cube([w, depth+t, board_thickness + t]);
