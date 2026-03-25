@@ -4,7 +4,7 @@ $fn = 64;
 r_inner = 5.25/2;
 r_outer = 5.5;
 
-d_magnet = 20.3;  // 20 or 25
+d_magnet = 25.3;  // 20 or 25
 h_magnet = 3.35;  // Between 3.3 and 3.4 is OK
 M4_d = 4.4;       // M4 screew to hold the magnet
 y_maghole = 73;   // Magnet Y center
@@ -22,6 +22,15 @@ usb_cut_z = 6;
 dist_y1 = 110.6;  // Y distance between M4 centers
 dist_y2 = 95.9;
 dist_x = 34.8;
+
+
+module fillet(smooth) {
+   offset(r = smooth) {
+     offset(delta = -smooth) {
+       children();
+     }
+   }
+}
 
 
 module flange(h_drill=11, diff=false) {
@@ -52,6 +61,15 @@ module flashlight() {
                         
                         translate([t, t, 0])
                         cube([X_board - 2*t, Y_board - 2*t, H - t], center=false);
+                        
+                        for (y=[45:6:70]) {
+                            translate([0, y, 13])
+                            rotate([0, 90, 0])
+                            linear_extrude(height=X_board) {
+                                fillet(0.99)
+                                square([17, 2], center=true);
+                            }
+                        }
                     }
                     
                     translate([X_board / 2, Y_board - y_maghole, H - (h_magnet + t) / 2])
