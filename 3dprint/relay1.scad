@@ -6,22 +6,38 @@ include <relays_lib.scad>
 // (straight outer walls) and the long walls are thickened inwards along short
 // stretches at both board ends, so the board fits tightly there; in between
 // there is room on both long sides for wires.
-wide_extra = 5.0; // extra total width, half on each side (AWG20 wire is ~1.8 mm)
+wide_extra = 4.0; // extra total width, half on each side (AWG20 wire is ~1.8 mm)
 wide_r = 2.0;     // rounding of the thickened wall ends (no sharp edges for wires)
-wide_ends = [4, 2];  // thickened stretch lengths along x: at the LED/header end (x=0), at the terminal end (x=L)
+wide_ends = [4, 4];  // thickened stretch lengths along x: at the LED/header end (x=0), at the terminal end (x=L)
+
+// window to read the relay nominal (05VDC / 12VDC printed on the relay top);
+// plus a second window at the 180 deg position
+term_x = 37;       // terminal block (screw opening) center along x
+nominal_w = 8;     // window size along x
+nominal_h = 4;     // window size along y
+nominal_dx = 13.5; // window center distance from the terminal block center
+nominal_y = 14;    // window center, board coordinates
+
+BOX_L = 42.8;
+BOX_W = 16.8;
 
 BOX = [
-    [43, 17, 20],
+    [BOX_L, BOX_W, 19.5],
     [
-        [37, 8.5, 8, 16],        // terminal, 3 screws
+        [term_x, 8.5, 8, 16],    // terminal, 3 screws
         [4.7, 8.5, 6, 12],       // pin header wires from the top
+        [term_x - nominal_dx, nominal_y, nominal_w, nominal_h, 1],
+        [BOX_L - (term_x - nominal_dx), BOX_W - nominal_y, nominal_w, nominal_h, 1],  // 180 deg rotated
     ],
     [
-        ["R", 8.5, 15],
+        ["R", 8.5, 16],
         ["L", 8.5, 9, 6],        // solder wires to the pin header from below
     ],
     [16.5, 27],                  // latches in the thin-walled middle
-    [["1", "РЕЛЕ (-)"], 20.4, 8.5, 3.8],
+    [
+        ["1", 12, 14.5, 5.5],              // top left, beside the window
+        ["РЕЛЕ (-)", 20.4, 8.4, 3.8],    // between the two windows
+    ],
 ];
 
 // thin-walled section between x0 and x1 (board coordinates)

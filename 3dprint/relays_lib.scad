@@ -67,9 +67,9 @@ text_font = "Liberation Sans:style=Bold";
 //
 // latches: latch ridge centers along L (board coordinates), on both long sides.
 //
-// label: [lines, x, y, size] text engraved into the cap top (centered at x/y in
-//   board coordinates, keep it off the holes) and into the bottom of the base
-//   plate (centered on the board).
+// label: rows [[text, x, y, size], ...]; each row is engraved into the cap top
+//   centered at its own x/y (board coordinates, keep it off the holes); the
+//   base plate bottom gets the rows stacked in order, centered on the board.
 //
 // A box file can redefine the hooks below to add its own features:
 // extra_w(), inner_shape(), notch_cut(), latch_check().
@@ -156,12 +156,21 @@ module latch_ridge() {
 }
 
 
-// label lines centered at the origin, one under another
-module label_text(lb) {
-    n = len(lb[0]);
+module label_row(row) {
+    text(row[0], size=row[3], font=text_font, halign="center", valign="center");
+}
+
+
+// distance from the first row center down to row i, rows 1.4 x size apart
+function label_dy(rows, i) =
+    i == 0 ? 0 : label_dy(rows, i-1) + (rows[i-1][3] + rows[i][3]) / 2 * 1.4;
+
+
+// rows stacked one under another, centered at the origin
+module label_stack(rows) {
+    n = len(rows);
     for (i = [0:n-1])
-        translate([0, ((n-1)/2 - i) * lb[3] * 1.4])
-        text(lb[0][i], size=lb[3], font=text_font, halign="center", valign="center");
+        translate([0, label_dy(rows, n-1)/2 - label_dy(rows, i)]) label_row(rows[i]);
 }
 
 
@@ -173,9 +182,10 @@ module cap(b) {
         linear_extrude(height=Z) offset(r=t) translate([t, t]) inner_rect(b);
         translate([t, t, -1]) linear_extrude(height=Z-t+1) inner_shape(b);
 
-        // label on the top, reads from above
-        translate([board_x0(b) + b[4][1], board_y0(b) + b[4][2], Z - text_d])
-        linear_extrude(height=text_d+1) label_text(b[4]);
+        // label rows on the top, each at its own place, read from above
+        for (row = b[4])
+            translate([board_x0(b) + row[1], board_y0(b) + row[2], Z - text_d])
+            linear_extrude(height=text_d+1) label_row(row);
 
         for (h = b[1]) {
             translate([board_x0(b) + h[0], board_y0(b) + h[1], Z - t - 1])
@@ -203,7 +213,7 @@ module base(b) {
         linear_extrude(height=base_t) offset(delta=-fit) inner_shape(b);
         // mirrored, so it reads correctly from below
         translate([board_x0(b) + b[0][0]/2, board_y0(b) + b[0][1]/2, -1])
-        linear_extrude(height=text_d+1) mirror([1, 0, 0]) label_text(b[4]);
+        linear_extrude(height=text_d+1) mirror([1, 0, 0]) label_stack(b[4]);
     }
     for (x = b[3]) {
         translate([board_x0(b) + x, t + fit, 0]) rotate([0, 0, 180]) latch_ridge();

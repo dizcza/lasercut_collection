@@ -1,9 +1,9 @@
 include <relays_lib.scad>
 
-// 4. green buck converter with heatsink: IN pads in the left corners, OUT pads in the right ones
-dims = [42, 30, 20];
-in_reach = 5.5;    // IN corner cut reach from the board corner (both walls)
-out_reach = 8.5;   // OUT corner cut reach from the board corner (both walls)
+// 4. green buck converter with heatsink: IN pads in the left corners, OUT pads in the right ones;
+// the same pad cut in all four corners, so the part is symmetrical
+dims = [42, 30, 19.5];
+pad_reach = 5.5;   // corner cut reach from the board corner (both walls)
 pad_cut_h = pad_z + pad_h - 2;  // corner cut height above the floor
 
 // corner pad openings: the same cut on both walls meeting at a board corner,
@@ -22,13 +22,17 @@ BOX = [
     dims,
     [],
     concat(
-        corner_pad("L", "F", in_reach, pad_cut_h),
-        corner_pad("L", "B", in_reach, pad_cut_h),
-        corner_pad("R", "F", out_reach, pad_cut_h),
-        corner_pad("R", "B", out_reach, pad_cut_h)
+        corner_pad("L", "F", pad_reach, pad_cut_h),
+        corner_pad("L", "B", pad_reach, pad_cut_h),
+        corner_pad("R", "F", pad_reach, pad_cut_h),
+        corner_pad("R", "B", pad_reach, pad_cut_h)
     ),
-    [12, 24],          // latches clear of the corner cuts
-    [["4", "ЗЕЛЕНА", "ПОНИЖ"], 21, 15, 5],
+    [15, 27],          // latches symmetric about the middle, clear of the corner cuts
+    [
+        ["4", 21, 22, 5],
+        ["ЗЕЛЕНА", 21, 15, 5],
+        ["ПОНИЖ", 21, 8, 5],
+    ],
 ];
 
 

@@ -9,17 +9,18 @@ plank_z = 4.0;    // plank bottom above the floor, facing the terminal block bas
 
 BOX = [
     [46, 25, 17],
+    [],
     [
-        [8.6, 12.5, 16, 20, 2],  // 2x2 terminal block, 4 screws
-        [39, 12.5, 8, 19],       // 2-screw terminal block
-    ],
-    [
-        ["F", 8.2, 16.5, "top", true],
-        ["B", 8.2, 16.5, "top", true],
-        ["R", 12.5, 18, "top", true],
+        ["F", 8.2, 16, "top", true],
+        ["B", 8.2, 16, "top", true],
+        ["R", 12.5, 17, "top", true],
     ],
     [25, 38],
-    [["3", "РЕЛЕ", "(+)"], 25.8, 12.5, 3.6],
+    [
+        ["3", 22.5, 20.7, 5.5],
+        ["РЕЛЕ", 22.5, 13, 5.5],
+        ["(+)", 22.5, 5.3, 5.5],
+    ],
 ];
 
 // height "top" leaves only notch_keep of wall at the top; plank true (at
