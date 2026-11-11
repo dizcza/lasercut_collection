@@ -3,12 +3,12 @@ include <relays_lib.scad>
 // 3. green MOSFET module: 2x2 + 2 screw terminals
 
 // tall wire notches: [side, pos, width, "top", plank]
-notch_keep = 1.0; // wall left at the top of a "top" notch
+notch_keep = 1.5; // wall left at the top of a "top" notch
 plank_h = 6.0;    // height of the horizontal plank (bar) dividing a tall notch in two
 plank_z = 4.0;    // plank bottom above the floor, facing the terminal block base
 
 BOX = [
-    [46, 25, 17],
+    [46, 25, 16.75],
     [],
     [
         ["F", 8.2, 16, "top", true],

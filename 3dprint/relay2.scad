@@ -1,7 +1,7 @@
 include <relays_lib.scad>
 
 // 2. red 1-relay module with optocoupler: 2 x 3-screw terminals
-dims = [49.75, 25.5, 19.5];
+dims = [49.5, 24.8, 19];
 
 // window to read the relay nominal (05VDC / 12VDC printed on the relay top);
 // the cap fits either way round, so a second window sits at the 180 deg position

@@ -2,7 +2,7 @@ include <relays_lib.scad>
 
 // 4. green buck converter with heatsink: IN pads in the left corners, OUT pads in the right ones;
 // the same pad cut in all four corners, so the part is symmetrical
-dims = [42, 30, 19.5];
+dims = [41.75, 29.75, 19];
 pad_reach = 5.5;   // corner cut reach from the board corner (both walls)
 pad_cut_h = pad_z + pad_h - 2;  // corner cut height above the floor
 

@@ -18,8 +18,8 @@ nominal_h = 4;     // window size along y
 nominal_dx = 13.5; // window center distance from the terminal block center
 nominal_y = 14;    // window center, board coordinates
 
-BOX_L = 42.8;
-BOX_W = 16.8;
+BOX_L = 43;
+BOX_W = 17.1;
 
 BOX = [
     [BOX_L, BOX_W, 19.5],
