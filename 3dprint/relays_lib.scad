@@ -72,7 +72,7 @@ text_font = "Liberation Sans:style=Bold";
 //   base plate bottom gets the rows stacked in order, centered on the board.
 //
 // A box file can redefine the hooks below to add its own features:
-// extra_w(), inner_shape(), notch_cut(), latch_check().
+// extra_w(), inner_shape(), notch_cut(), latch_check(), cap_inside().
 
 
 module fillet(smooth) {
@@ -145,6 +145,10 @@ module notch_cut(b, n, Z) {
 module latch_check(b, x) {}
 
 
+// hook: extra solids added inside the cap (ribs etc.)
+module cap_inside(b) {}
+
+
 // ridge along x, protruding to +y
 module latch_ridge() {
     // flat bottom locks the plate, ramp on top eases insertion
@@ -169,8 +173,9 @@ function label_dy(rows, i) =
 // rows stacked one under another, centered at the origin
 module label_stack(rows) {
     n = len(rows);
-    for (i = [0:n-1])
-        translate([0, label_dy(rows, n-1)/2 - label_dy(rows, i)]) label_row(rows[i]);
+    if (n > 0)
+        for (i = [0:n-1])
+            translate([0, label_dy(rows, n-1)/2 - label_dy(rows, i)]) label_row(rows[i]);
 }
 
 
@@ -178,6 +183,7 @@ module label_stack(rows) {
 module cap(b) {
     S = box_size(b);
     X = S[0]; Y = S[1]; Z = S[2];
+    cap_inside(b);
     difference() {
         linear_extrude(height=Z) offset(r=t) translate([t, t]) inner_rect(b);
         translate([t, t, -1]) linear_extrude(height=Z-t+1) inner_shape(b);
