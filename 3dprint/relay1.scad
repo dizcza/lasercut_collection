@@ -11,7 +11,7 @@ wide_r = 2.0;     // rounding of the thickened wall ends (no sharp edges for wir
 wide_ends = [4, 4];  // thickened stretch lengths along x: at the LED/header end (x=0), at the terminal end (x=L)
 
 // window to read the relay nominal (05VDC / 12VDC printed on the relay top);
-// plus a second window at the 180 deg position
+// one window only: the board orientation in the box is fixed
 term_x = 37;       // terminal block (screw opening) center along x
 nominal_w = 8;     // window size along x
 nominal_h = 4;     // window size along y
@@ -27,7 +27,6 @@ BOX = [
         [term_x, 8.5, 8, 16],    // terminal, 3 screws
         [4.7, 8.5, 6, 12],       // pin header wires from the top
         [term_x - nominal_dx, nominal_y, nominal_w, nominal_h, 1],
-        [BOX_L - (term_x - nominal_dx), BOX_W - nominal_y, nominal_w, nominal_h, 1],  // 180 deg rotated
     ],
     [
         ["R", 8.5, 16],
@@ -36,7 +35,7 @@ BOX = [
     [16.5, 27],                  // latches in the thin-walled middle
     [
         ["1", 12, 14.5, 5.5],              // top left, beside the window
-        ["РЕЛЕ (-)", 20.4, 8.4, 3.8],    // between the two windows
+        ["РЕЛЕ (-)", 20.4, 8.4, 3.8],    // below the window
     ],
 ];
 

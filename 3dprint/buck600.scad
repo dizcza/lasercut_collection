@@ -4,9 +4,9 @@ include <relays_lib.scad>
 // OUT-/OUT+ at the other end (x=L), both near the y=0 long side.
 // One oval wire entry per terminal pair in each end wall.
 
-t = 1.2;           // wall and ceiling thickness (overrides the library value)
+t = 1.4;           // wall and ceiling thickness (overrides the library value)
 
-board = [101, 62, 36];
+board = [100, 61, 36];
 
 // one pedestal (rib) in the middle of every wall, from the base plate top to
 // the ceiling; the cavity grows by 2 x ped_t in length and width so the board
