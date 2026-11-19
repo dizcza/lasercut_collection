@@ -2,7 +2,7 @@ include <relays_lib.scad>
 
 // 400 W boost converter with two heatsinks: 2-screw terminals at both ends (IN / OUT)
 t = 1.4;
-dims = [67, 48.5, 30];
+dims = [67.1, 49, 30];
 
 // vent slots in both long walls, in front of the heatsinks
 vent_n = 5;

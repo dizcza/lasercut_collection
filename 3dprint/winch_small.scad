@@ -17,7 +17,7 @@ $fn = 64;
 // relay
 can = [58.5, 33, 26.5];      // can, goes into the bottom case first
 body = [62, 38, 35.5];       // wider body; body[2] = main plate height from the can bottom
-term_h = 22;                 // room above the main plate for the terminals, ring lugs and wire bends
+term_h = 24;                 // room above the main plate for the terminals, ring lugs and wire bends
 
 // case
 gap = 0.3;                   // clearance around the relay
@@ -41,7 +41,7 @@ flange_dx = grow_r + head_d/2 + 0.5;   // hole distance from the side wall: the 
 // past the flange columns; the screws go into the wall along y
 ear_t = 4;                   // ear thickness (along y)
 ear_r = 6.5;                 // ear end radius
-ear_hole = 5.5;              // M5 screw
+ear_hole = 4.4;              // M5 screw
 ear_head_d = 10;             // M5 screw head (and screwdriver) clearance
 ear_grow_r = 4;              // smooth growup between the flange column and the ear
 ear_dx = flange_dx + r_outer + ear_grow_r + ear_head_d/2;   // hole distance from the side wall
